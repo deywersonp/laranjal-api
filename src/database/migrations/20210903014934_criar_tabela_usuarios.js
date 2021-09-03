@@ -6,6 +6,7 @@ exports.up = knex =>
     table.text('imagem')
     table.text('email').notNullable()
     table.text('senha').notNullable()
+    table.boolean('admin').notNullable()
   });
 
 exports.down = knex => knex.schema.dropTable('consultores');
