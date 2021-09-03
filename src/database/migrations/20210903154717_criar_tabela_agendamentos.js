@@ -13,8 +13,7 @@ exports.up = knex =>
       .onDelete('CASCADE')
 
     table.date('data_visita').notNullable()
-    table.text('periodo_visita').notNullable()
-    table.integer('numero_mesa').notNullable()
+    table.text('espaco_agendado')
   });
 
 exports.down = knex => knex.schema.dropTable('agendamentos');

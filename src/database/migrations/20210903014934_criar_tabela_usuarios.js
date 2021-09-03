@@ -6,7 +6,6 @@ exports.up = knex =>
     table.text('imagem')
     table.text('email').notNullable()
     table.text('senha').notNullable()
-    table.text('espaco_agendado').notNullable()
     table.boolean('admin').notNullable()
   });
 
