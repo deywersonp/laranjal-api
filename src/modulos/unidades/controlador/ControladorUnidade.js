@@ -21,6 +21,18 @@ module.exports = {
       capacidade_reduzida,
     } = req.body;
 
+    const unidadeExiste = await knex('unidades')
+      .where({
+        rua: `${rua}`,
+        bairro: `${bairro}`,
+        cidade: `${cidade}`
+      })
+
+    if (unidadeExiste.length > 0) {
+      console.log(unidadeExiste)
+      return res.status(400).json({ message: "Está unidade já está cadastrada!" })
+    }
+
     await knex('unidades').insert({
       id: uuidv4(),
       cep,
