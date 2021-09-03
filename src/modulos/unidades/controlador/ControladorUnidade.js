@@ -88,5 +88,24 @@ module.exports = {
       })
 
     return res.status(204).send()
+  },
+
+  async apagar(req, res) {
+    const { id } = req.params;
+
+    try {
+      const unidade = await knex('unidades').where({ id })
+      if (!unidade.length > 0) {
+        return res.status(400).json({ message: "Não foi encontrada nenhuma unidade com este identificador." })
+      }
+    } catch (err) {
+      return res.status(400).json({ message: "Não foi encontrada nenhuma unidade com este identificador." })
+    }
+
+    await knex('unidades')
+      .where({ id })
+      .del()
+
+    return res.status(204).send();
   }
 }
