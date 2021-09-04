@@ -20,6 +20,7 @@ rotas.post('/unidades', controladorUnidade.criar)
 rotas.put('/unidades/:id', verificaExistencia, controladorUnidade.atualizar)
 rotas.delete('/unidades/:id', verificaExistencia, controladorUnidade.apagar)
 
-rotas.get('/agendamentos/:id', controladorAgendamento.listar)
+rotas.post('/agendamentos', controladorAgendamento.criar)
+rotas.get('/agendamentos/:consultor_id', controladorAgendamento.listar)
 
 module.exports = rotas;
