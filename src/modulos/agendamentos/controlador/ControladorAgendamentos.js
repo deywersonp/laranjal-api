@@ -6,8 +6,12 @@ module.exports = {
     const { consultor_id } = req.params;
 
     const resultado = await knex('agendamentos')
-      .select('data_visita', 'espaco_agendado')
+      .select('agendamentos.data_visita',
+        'agendamentos.espaco_agendado',
+        'unidades.bairro',
+        'unidades.cidade')
       .leftJoin('consultores', 'agendamentos.consultor_id', '=', 'consultores.id')
+      .rightJoin('unidades', 'agendamentos.unidade_id', '=', 'unidades.id')
       .where({ 'consultores.id': consultor_id })
 
     return res.status(200).json(resultado);
@@ -22,7 +26,6 @@ module.exports = {
       .first();
 
     if (!verificaUnidade) {
-      console.log(verificaUnidade)
       return res.status(400).json({ message: "Unidade não encontrada." })
     }
 
