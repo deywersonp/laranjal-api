@@ -38,5 +38,14 @@ module.exports = {
     })
 
     return res.status(201).json()
+  },
+  async apagar(req, res) {
+    const { agendamento_id } = req.params;
+
+    await knex('agendamentos')
+      .where({ id: agendamento_id })
+      .del();
+
+    return res.status(204).send();
   }
 }
