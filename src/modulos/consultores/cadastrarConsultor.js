@@ -4,15 +4,14 @@ const knex = require("../../database");
 const validarCadastro = require("../../validacoes/validacaoCadastroConsultor");
 
 async function cadastrarConsultor(req, res) {
-    const { nome, nome_social, email, senha, admin } = req.body;
+    const { nome, nome_social, email, senha } = req.body;
 
     try {
         const erroValidacaoCadastro = validarCadastro(
             nome,
             nome_social,
             email,
-            senha,
-            admin
+            senha
         );
 
         if (erroValidacaoCadastro) {
@@ -27,17 +26,15 @@ async function cadastrarConsultor(req, res) {
 
         const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-        const id = uuidv4();
-        
         const consultorCadastrado = await knex("consultores").insert({
-           id, nome, nome_social, email, senha: senhaCriptografada, admin
+           id: uuidv4(), nome, nome_social, email, senha: senhaCriptografada, admin: false
         });
 
         if (consultorCadastrado.length === 0) {
             return res.status(400).json("Erro ao cadastrar consultor.");
         }
 
-        return res.status(200).json();
+        return res.status(201).json();
     } catch (error) {
         return res.status(400).json(error.message);
     }

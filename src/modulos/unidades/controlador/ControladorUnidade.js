@@ -29,7 +29,6 @@ module.exports = {
       })
 
     if (unidadeExiste.length > 0) {
-      console.log(unidadeExiste)
       return res.status(400).json({ message: "Está unidade já está cadastrada!" })
     }
 

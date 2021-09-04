@@ -2,8 +2,7 @@ function validarCadastro(
     nome,
     nome_social,
     email,
-    senha,
-    admin
+    senha
  ) {
      if (!nome) {
          return "O preenchimento do nome é obrigatório.";
@@ -76,10 +75,6 @@ function validarCadastro(
 
      if (senha.length > 100) {
          return "A senha deve conter, no máximo, 100 caracteres.";
-     }
-
-     if (typeof admin !== "boolean") {
-         return "O campo 'admin' só aceita valores booleanos(true ou false).";
      }
  }
 
