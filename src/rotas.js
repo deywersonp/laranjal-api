@@ -8,6 +8,8 @@ const verificarToken = require("./filtros/verificarToken");
 const verificaExistencia = require("./validacoes/VerificaExistencia")
 const controladorUnidade = require('./modulos/unidades/controlador/ControladorUnidade')
 
+const controladorAgendamento = require("./modulos/agendamentos/controlador/ControladorAgendamentos")
+
 rotas.post("/consultores", cadastrarConsultor);
 rotas.post("/login", loginConsultor);
 
@@ -18,5 +20,6 @@ rotas.post('/unidades', controladorUnidade.criar)
 rotas.put('/unidades/:id', verificaExistencia, controladorUnidade.atualizar)
 rotas.delete('/unidades/:id', verificaExistencia, controladorUnidade.apagar)
 
+rotas.get('/agendamentos/:id', controladorAgendamento.listar)
 
 module.exports = rotas;
