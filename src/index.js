@@ -9,4 +9,4 @@ app.use(cors());
 app.use(express.json());
 app.use(rotas);
 
-app.listen(8000);
+app.listen(8000, () => console.log("Server is running!"));
