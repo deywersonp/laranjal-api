@@ -30,7 +30,7 @@ module.exports = {
     }
 
     await knex('agendamentos').insert({
-      id: uuidv4(),
+      secundario_id: uuidv4(),
       consultor_id,
       unidade_id,
       data_visita,
