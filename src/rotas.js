@@ -18,6 +18,7 @@ rotas.use(verificarToken);
 rotas.get("/consultores", controladorConsultores.listarConsultores);
 rotas.get("/consultores/:id", controladorConsultores.obterConsultor);
 rotas.patch("/consultores", controladorConsultores.atualizarConsultor);
+rotas.delete("/consultores/:id", controladorConsultores.removerConsultor);
 
 rotas.get('/unidades', controladorUnidade.listar)
 rotas.post('/unidades', controladorUnidade.criar)

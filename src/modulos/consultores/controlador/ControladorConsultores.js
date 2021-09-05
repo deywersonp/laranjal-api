@@ -160,9 +160,44 @@ async function atualizarConsultor(req, res) {
 
 }
 
+async function removerConsultor(req, res) {
+    const { id } = req.params;
+
+    try {
+        const consultor = await knex("consultores")
+            .where({ id })
+            .first();
+        
+        if (!consultor) {
+            return res.status(404).json("Consultor não encontrado.");
+        }
+
+        const nomeDaImagemDB = obterNomeDaImagem(consultor.imagem);
+        
+        const erroAoExcluir = await excluirImagem(nomeDaImagemDB);
+
+        if (erroAoExcluir) {
+            return res.status(400).json(erroAoExcluir);
+        }
+
+        const consultorExcluido = await knex("consultores")
+            .where({ id })
+            .del();
+        
+        if (!consultorExcluido) {
+            return res.status(400).json("Erro ao remover consultor.");
+        }
+
+        return res.status(200).json();
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+}
+
 module.exports = {
     listarConsultores,
     obterConsultor,
     cadastrarConsultor,
-    atualizarConsultor
+    atualizarConsultor,
+    removerConsultor
 }
