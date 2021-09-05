@@ -15,6 +15,7 @@ rotas.post("/login", loginConsultor);
 
 rotas.use(verificarToken);
 
+rotas.get("/consultores/:id", controladorConsultores.obterConsultor);
 rotas.patch("/consultores", controladorConsultores.atualizarConsultor);
 
 rotas.get('/unidades', controladorUnidade.listar)
