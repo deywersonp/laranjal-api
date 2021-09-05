@@ -7,7 +7,7 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('consultores').insert(
         {
-          id: uuidv4(),
+          secundario_id: uuidv4(),
           nome: 'admin',
           nome_social: 'admin',
           email: 'admin@fcamara.com',
