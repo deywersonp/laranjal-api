@@ -7,6 +7,24 @@ const cadastrarImagem = require("../../../utils/cadastrarImagem");
 const excluirImagem = require("../../../utils/excluirImagem");
 const obterNomeDaImagem = require("../../../utils/obterNomeDaImagem");
 
+async function listarConsultores(req, res) {
+    try {
+        const consultores = await knex("consultores")
+            .select(
+                "nome",
+                "nome_social",
+                "email",
+                "imagem",
+                "admin"
+            )
+            .orderBy("nome", "asc");
+
+        return res.status(200).json(consultores);
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+}
+
 async function obterConsultor(req, res) {
     const { id } = req.params;
     
@@ -15,11 +33,11 @@ async function obterConsultor(req, res) {
             .where({ id })
             .first()
             .select(
-                "nome as Nome",
-                "nome_social as NomeSocial",
-                "imagem as Imagem",
-                "email as Email",
-                "admin as Admin"
+                "nome",
+                "nome_social",
+                "imagem",
+                "email",
+                "admin"
             );
 
         if (!consultor) {
@@ -143,7 +161,8 @@ async function atualizarConsultor(req, res) {
 }
 
 module.exports = {
+    listarConsultores,
+    obterConsultor,
     cadastrarConsultor,
-    atualizarConsultor,
-    obterConsultor
+    atualizarConsultor
 }
