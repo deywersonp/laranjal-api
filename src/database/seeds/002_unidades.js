@@ -7,7 +7,8 @@ exports.seed = function (knex) {
       // Inserts seed entries
       return knex('unidades').insert([
         {
-          id: uuidv4(),
+          id: 1,
+          secundario_id: uuidv4(),
           cep: 11065500,
           rua: 'Praça dos Expedicionários',
           numero: 19,
@@ -19,7 +20,8 @@ exports.seed = function (knex) {
           capacidade_reduzida: 40,
         },
         {
-          id: uuidv4(),
+          id: 2,
+          secundario_id: uuidv4(),
           cep: 1415906,
           rua: 'Rua Bela Cintra',
           numero: 986,
