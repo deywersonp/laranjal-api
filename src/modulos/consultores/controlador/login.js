@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const knex = require("../../database");
-const validarLogin = require("../../validacoes/validacaoLogin");
+const knex = require("../../../database");
+const validarLogin = require("../../../validacoes/validacaoLogin");
 
 async function loginConsultor(req, res) {
     const { email, senha } = req.body;

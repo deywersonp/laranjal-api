@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 const { v4: uuidv4 } = require("uuid");
-const knex = require("../../database");
-const validarCadastro = require("../../validacoes/validacaoCadastroConsultor");
+const knex = require("../../../database");
+const validarCadastro = require("../../../validacoes/validacaoCadastroConsultor");
 
 async function cadastrarConsultor(req, res) {
     const { nome, nome_social, email, senha } = req.body;
@@ -40,4 +40,6 @@ async function cadastrarConsultor(req, res) {
     }
 }
 
-module.exports = cadastrarConsultor;
+module.exports = {
+    cadastrarConsultor,
+}

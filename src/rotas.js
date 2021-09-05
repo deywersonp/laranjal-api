@@ -1,8 +1,8 @@
 const express = require("express");
 const rotas = express();
 
-const cadastrarConsultor = require("./modulos/consultores/cadastrarConsultor");
-const loginConsultor = require("./modulos/consultores/login");
+const controladorConsultores = require("./modulos/consultores/controlador/ControladorConsultores");
+const loginConsultor = require("./modulos/consultores/controlador/login");
 const verificarToken = require("./filtros/verificarToken");
 
 const verificaExistencia = require("./validacoes/VerificaExistencia")
@@ -10,7 +10,7 @@ const controladorUnidade = require('./modulos/unidades/controlador/ControladorUn
 
 const controladorAgendamento = require("./modulos/agendamentos/controlador/ControladorAgendamentos")
 
-rotas.post("/consultores", cadastrarConsultor);
+rotas.post("/consultores", controladorConsultores.cadastrarConsultor);
 rotas.post("/login", loginConsultor);
 
 rotas.use(verificarToken);
