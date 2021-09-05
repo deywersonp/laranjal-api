@@ -65,16 +65,31 @@ async function cadastrarConsultor(req, res) {
             return res.status(400).json(erroValidacaoCadastro);
         }
 
-        const emailCadastrado = await knex("consultores").where("email", "ilike", email);
+        const emailCadastrado = await knex("consultores")
+            .where("email", "ilike", email);
 
         if (emailCadastrado.length > 0) {
             return res.status(400).json("O e-mail informado já foi cadastrado no sistema.");
         }
 
+        const consultorExiste = await knex("dados_fcamara")
+            .where("email", "ilike", email)
+            .first();
+
+        if (!consultorExiste) {
+            return res.status(403).json("Cadastro não autorizado. Consultor não identificado.");
+        }
+
         const senhaCriptografada = await bcrypt.hash(senha, 10);
 
-        const consultorCadastrado = await knex("consultores").insert({
-           id: uuidv4(), nome, nome_social, email, senha: senhaCriptografada, admin: false
+        const consultorCadastrado = await knex("consultores")
+        .insert({
+           secundario_id: uuidv4(), 
+           nome, 
+           nome_social, 
+           email, 
+           senha: senhaCriptografada, 
+           admin: false
         });
 
         if (consultorCadastrado.length === 0) {
