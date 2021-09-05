@@ -33,7 +33,7 @@ module.exports = {
     }
 
     await knex('unidades').insert({
-      id: uuidv4(),
+      secundario_id: uuidv4(),
       cep,
       rua,
       complemento,
