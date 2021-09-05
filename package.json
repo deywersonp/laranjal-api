@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/deywersonp/fcamara-squad38-back#readme",
   "dependencies": {
+    "@supabase/supabase-js": "^1.22.5",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
