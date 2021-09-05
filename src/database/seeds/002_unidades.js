@@ -9,19 +9,6 @@ exports.seed = function (knex) {
         {
           id: 1,
           secundario_id: uuidv4(),
-          cep: 11065500,
-          rua: 'Praça dos Expedicionários',
-          numero: 19,
-          complemento: '2º andar',
-          bairro: 'Gonzaga',
-          cidade: 'Santos',
-          estado: 'São Paulo',
-          capacidade_total: 100,
-          capacidade_reduzida: 40,
-        },
-        {
-          id: 2,
-          secundario_id: uuidv4(),
           cep: 1415906,
           rua: 'Rua Bela Cintra',
           numero: 986,
@@ -32,6 +19,19 @@ exports.seed = function (knex) {
           capacidade_total: 600,
           capacidade_reduzida: 240,
         },
+        {
+          id: 2,
+          secundario_id: uuidv4(),
+          cep: 11065500,
+          rua: 'Praça dos Expedicionários',
+          numero: 19,
+          complemento: '2º andar',
+          bairro: 'Gonzaga',
+          cidade: 'Santos',
+          estado: 'São Paulo',
+          capacidade_total: 100,
+          capacidade_reduzida: 40,
+        }
       ]);
     });
 };
