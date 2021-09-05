@@ -7,6 +7,31 @@ const cadastrarImagem = require("../../../utils/cadastrarImagem");
 const excluirImagem = require("../../../utils/excluirImagem");
 const obterNomeDaImagem = require("../../../utils/obterNomeDaImagem");
 
+async function obterConsultor(req, res) {
+    const { id } = req.params;
+    
+    try {
+        const consultor = await knex("consultores")
+            .where({ id })
+            .first()
+            .select(
+                "nome as Nome",
+                "nome_social as NomeSocial",
+                "imagem as Imagem",
+                "email as Email",
+                "admin as Admin"
+            );
+
+        if (!consultor) {
+            return res.status(404).json("Consultor não encontrado.");
+        }
+
+        return res.status(200).json(consultor); 
+    } catch (error) {
+        return res.status(400).json(error.message);
+    }
+}
+
 async function cadastrarConsultor(req, res) {
     const { nome, nome_social, email, senha } = req.body;
 
@@ -116,7 +141,9 @@ async function atualizarConsultor(req, res) {
     }
 
 }
+
 module.exports = {
     cadastrarConsultor,
     atualizarConsultor,
+    obterConsultor
 }
