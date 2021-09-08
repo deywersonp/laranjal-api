@@ -1,32 +1,22 @@
 function validarCadastro(
-    nome,
-    nome_social,
+    apelido,
     email,
     senha
  ) {
-     if (!nome) {
-         return "O preenchimento do nome é obrigatório.";
+     if (!apelido) {
+         return "O preenchimento do apelido é obrigatório.";
      }
 
-     if (!nome.trim()) {
-        return "O preenchimento do nome é obrigatório.";
+     if (!apelido.trim()) {
+        return "O preenchimento do apelido é obrigatório.";
      }
 
-     if (typeof nome !== "string") {
-        return "O nome deve ser preenchido com um texto.";
+     if (typeof apelido !== "string") {
+        return "O apelido deve ser preenchido com um texto.";
      }
 
-     if (nome.length > 100) {
+     if (apelido.length > 100) {
         return "O nome deve conter, no máximo, 100 caracteres.";
-     }
-
-     if (nome_social) {
-         if (typeof nome_social !== "string") {
-             return "O nome social deve ser preenchido com um texto.";
-         }
-         if (nome_social.length > 100) {
-             return "O nome social deve conter, no máximo, 100 caracteres.";
-         }
      }
 
      if (!email) {
