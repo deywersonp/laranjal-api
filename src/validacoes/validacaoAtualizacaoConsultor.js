@@ -1,10 +1,10 @@
 function validarAtualizacaoConsultor(
-    nome_social,
+    apelido,
     senha
 ) {
-    if (nome_social) {
-        if (typeof nome_social !== "string") {
-            return "O nome social deve ser preenchido com um texto.";
+    if (apelido) {
+        if (typeof apelido !== "string") {
+            return "O apelido deve ser preenchido com um texto.";
         }
     }
 

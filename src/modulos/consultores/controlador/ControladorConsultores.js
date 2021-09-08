@@ -102,19 +102,19 @@ async function cadastrarConsultor(req, res) {
 }
 
 async function atualizarConsultor(req, res) {
-    const { nome_social, imagem, senha } = req.body;
+    const { apelido, imagem, senha } = req.body;
     const { consultor } = req;
     let urlImagem;
     let senhaCriptografada;
     let nomeDaImagem = `$consultor${consultor.id}/avatar`;
 
-    if (!nome_social && !imagem && !senha) {
+    if (!apelido && !imagem && !senha) {
         return res.status(400).json("Insira ao menos um campo para atualização.");
     }
 
     try {
         const erroValidacaoAtualizacao = validarAtualizacao(
-            nome_social, senha
+            apelido, senha
         );
 
         if (erroValidacaoAtualizacao) {
@@ -152,7 +152,7 @@ async function atualizarConsultor(req, res) {
         const consultorAtualizado = await knex("consultores")
             .where({ id: consultor.id })
             .update({
-                nome_social,
+                apelido,
                 senha: senhaCriptografada,
                 imagem: urlImagem
             });
