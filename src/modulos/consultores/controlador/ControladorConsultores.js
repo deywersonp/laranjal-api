@@ -27,16 +27,17 @@ async function listarConsultores(req, res) {
 
 async function obterConsultor(req, res) {
     const { id } = req.params;
-    
+
     try {
         const consultor = await knex("consultores")
-            .where({ id })
+            .join("dados_fcamara", "consultores.email", "dados_fcamara.email")
+            .where("consultores.id", id)
             .first()
             .select(
-                "nome",
-                "nome_social",
+                "dados_fcamara.nome_completo",
+                "apelido",
                 "imagem",
-                "email",
+                "consultores.email",
                 "admin"
             );
 
