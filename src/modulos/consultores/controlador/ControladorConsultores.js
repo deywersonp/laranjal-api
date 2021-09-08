@@ -10,14 +10,15 @@ const obterNomeDaImagem = require("../../../utils/obterNomeDaImagem");
 async function listarConsultores(req, res) {
     try {
         const consultores = await knex("consultores")
+            .join("dados_fcamara", "consultores.email", "dados_fcamara.email")
             .select(
-                "nome",
-                "nome_social",
-                "email",
+                "dados_fcamara.nome_completo",
+                "apelido",
+                "consultores.email",
                 "imagem",
                 "admin"
             )
-            .orderBy("nome", "asc");
+            .orderBy("apelido", "asc");
 
         return res.status(200).json(consultores);
     } catch (error) {
