@@ -9,25 +9,25 @@ exports.seed = function(knex) {
         {
           secundario_id: uuidv4(),
           nome_completo: "Bruno Sousa",
-          email: "brunosousa@fcamara.com",
+          email: "brunosousa@fcamara.com.br",
           cpf: "00000000000"
         },
         {
           secundario_id: uuidv4(),
           nome_completo: "Cristiano Rodrigues",
-          email: "cristianorodrigues@fcamara.com",
+          email: "cristianorodrigues@fcamara.com.br",
           cpf: "11111111111"
         },
         {
           secundario_id: uuidv4(),
           nome_completo: "Deywerson Pereira",
-          email: "deywersonpereira@fcamara.com",
+          email: "deywersonpereira@fcamara.com.br",
           cpf: "22222222222"
         },
         {
           secundario_id: uuidv4(),
           nome_completo: "Lucas Jurado",
-          email: "lucasjurado@fcamara.com",
+          email: "lucasjurado@fcamara.com.br",
           cpf: "33333333333"
         }
       ]);
