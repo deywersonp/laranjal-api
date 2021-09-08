@@ -51,12 +51,11 @@ async function obterConsultor(req, res) {
 }
 
 async function cadastrarConsultor(req, res) {
-    const { nome, nome_social, email, senha } = req.body;
+    const { apelido, email, senha } = req.body;
 
     try {
         const erroValidacaoCadastro = validarCadastro(
-            nome,
-            nome_social,
+            apelido,
             email,
             senha
         );
@@ -85,8 +84,7 @@ async function cadastrarConsultor(req, res) {
         const consultorCadastrado = await knex("consultores")
         .insert({
            secundario_id: uuidv4(), 
-           nome, 
-           nome_social, 
+           apelido, 
            email, 
            senha: senhaCriptografada, 
            admin: false
