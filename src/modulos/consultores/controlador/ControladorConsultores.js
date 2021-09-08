@@ -186,12 +186,14 @@ async function removerConsultor(req, res) {
             return res.status(404).json("Consultor não encontrado.");
         }
 
-        const nomeDaImagemDB = obterNomeDaImagem(consultor.imagem);
+        if (consultor.imagem) {
+            const nomeDaImagemDB = obterNomeDaImagem(consultor.imagem);
         
-        const erroAoExcluir = await excluirImagem(nomeDaImagemDB);
+            const erroAoExcluir = await excluirImagem(nomeDaImagemDB);
 
-        if (erroAoExcluir) {
-            return res.status(400).json(erroAoExcluir);
+            if (erroAoExcluir) {
+                return res.status(400).json(erroAoExcluir);
+            }
         }
 
         const consultorExcluido = await knex("consultores")
