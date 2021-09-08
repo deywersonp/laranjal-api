@@ -8,9 +8,8 @@ exports.seed = function (knex) {
       return knex('consultores').insert(
         {
           secundario_id: uuidv4(),
-          nome: 'admin',
-          nome_social: 'admin',
-          email: 'admin@fcamara.com',
+          apelido: 'admin',
+          email: 'admin@fcamara.com.br',
           senha: 'admin',
           admin: true
         },

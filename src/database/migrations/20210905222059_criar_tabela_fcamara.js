@@ -3,7 +3,6 @@ exports.up = knex =>
         table.increments("id").primary()
         table.uuid("secundario_id").notNullable()
         table.text("nome_completo").notNullable()
-        table.text("nome_social")
         table.text("email").notNullable()
         table.text("cpf").notNullable().unique("cpf")
         table.timestamp("created_at").defaultTo(knex.fn.now())

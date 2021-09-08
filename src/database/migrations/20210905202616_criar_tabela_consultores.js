@@ -2,8 +2,7 @@ exports.up = knex =>
   knex.schema.createTable('consultores', table => {
     table.increments('id').primary()
     table.uuid('secundario_id').notNullable()
-    table.text('nome').notNullable()
-    table.text('nome_social')
+    table.text('apelido').notNullable()
     table.text('imagem')
     table.text('email').notNullable()
     table.text('senha').notNullable()
