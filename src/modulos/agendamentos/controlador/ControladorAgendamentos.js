@@ -3,13 +3,12 @@ const { v4: uuidv4 } = require('uuid');
 
 module.exports = {
   async listar(req, res) {
-    const { consultor_id } = req.params;
+    const { consultor_id } = req.headers;
 
     const resultado = await knex('agendamentos')
       .select('agendamentos.data_visita',
         'agendamentos.espaco_agendado',
-        'unidades.bairro',
-        'unidades.cidade')
+        'unidades.nome_unidade')
       .leftJoin('consultores', 'agendamentos.consultor_id', '=', 'consultores.id')
       .rightJoin('unidades', 'agendamentos.unidade_id', '=', 'unidades.id')
       .where({ 'consultores.id': consultor_id })
@@ -18,11 +17,11 @@ module.exports = {
   },
 
   async criar(req, res) {
-    const { consultor_id, unidade_id } = req.headers;
-    const { data_visita, espaco_agendado } = req.body;
+    const { consultor_id } = req.headers;
+    const { nome_unidade, data_visita, espaco_agendado } = req.body;
 
     const verificaUnidade = await knex('unidades')
-      .where({ "id": unidade_id })
+      .where({ nome_unidade })
       .first();
 
     if (!verificaUnidade) {
@@ -32,13 +31,14 @@ module.exports = {
     await knex('agendamentos').insert({
       secundario_id: uuidv4(),
       consultor_id,
-      unidade_id,
+      unidade_id: verificaUnidade.id,
       data_visita,
       espaco_agendado
     })
 
     return res.status(201).json()
   },
+
   async apagar(req, res) {
     const { agendamento_id } = req.params;
 

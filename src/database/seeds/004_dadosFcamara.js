@@ -1,11 +1,17 @@
 const { v4: uuidv4 } = require("uuid");
 
-exports.seed = function(knex) {
+exports.seed = function (knex) {
   // Deletes ALL existing entries
   return knex("dados_fcamara").del()
     .then(function () {
       // Inserts seed entries
       return knex("dados_fcamara").insert([
+        {
+          secundario_id: uuidv4(),
+          nome_completo: "Admin Admin",
+          email: "admin@fcamara.com.br",
+          cpf: "12121212121"
+        },
         {
           secundario_id: uuidv4(),
           nome_completo: "Bruno Sousa",
