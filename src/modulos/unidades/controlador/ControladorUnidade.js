@@ -10,6 +10,7 @@ module.exports = {
 
   async criar(req, res) {
     const {
+      nome_unidade,
       cep,
       rua,
       complemento,
@@ -23,6 +24,7 @@ module.exports = {
 
     const unidadeExiste = await knex('unidades')
       .where({
+        nome_unidade: `${nome_unidade}`,
         rua: `${rua}`,
         bairro: `${bairro}`,
         cidade: `${cidade}`
@@ -34,6 +36,7 @@ module.exports = {
 
     await knex('unidades').insert({
       secundario_id: uuidv4(),
+      nome_unidade,
       cep,
       rua,
       complemento,
@@ -52,6 +55,7 @@ module.exports = {
     const { id } = req.params;
 
     const {
+      nome_unidade,
       cep,
       rua,
       complemento,
@@ -66,6 +70,7 @@ module.exports = {
     await knex('unidades')
       .where({ id })
       .update({
+        nome_unidade,
         cep,
         rua,
         complemento,
