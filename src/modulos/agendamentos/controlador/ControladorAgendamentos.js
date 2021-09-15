@@ -16,6 +16,21 @@ module.exports = {
     return res.status(200).json(resultado);
   },
 
+  async listarTodos(req, res) {
+    const { data_visita } = req.headers;
+
+    const resultado = await knex('agendamentos')
+      .select('agendamentos.data_visita',
+        'agendamentos.espaco_agendado',
+        'consultores.apelido',
+        'consultores.imagem',
+        'consultores.email')
+      .leftJoin('consultores', 'agendamentos.consultor_id', '=', 'consultores.id')
+      .where({ 'agendamentos.data_visita': data_visita })
+
+    return res.status(200).json(resultado);
+  },
+
   async criar(req, res) {
     const { consultor_id } = req.headers;
     const { nome_unidade, data_visita, espaco_agendado } = req.body;

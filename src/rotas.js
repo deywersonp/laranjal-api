@@ -21,13 +21,14 @@ rotas.get("/consultores/:id", controladorConsultores.obterConsultor);
 rotas.patch("/consultores", controladorConsultores.atualizarConsultor);
 rotas.delete("/consultores/:id", controladorConsultores.removerConsultor);
 
-rotas.get('/unidades', controladorUnidade.listar)
-rotas.post('/unidades', VerificaSeAdmin, controladorUnidade.criar)
-rotas.put('/unidades/:id', VerificaSeAdmin, verificaExistencia, controladorUnidade.atualizar)
-rotas.delete('/unidades/:id', VerificaSeAdmin, verificaExistencia, controladorUnidade.apagar)
+rotas.get('/unidades', controladorUnidade.listar);
+rotas.post('/unidades', VerificaSeAdmin, controladorUnidade.criar);
+rotas.put('/unidades/:id', VerificaSeAdmin, verificaExistencia, controladorUnidade.atualizar);
+rotas.delete('/unidades/:id', VerificaSeAdmin, verificaExistencia, controladorUnidade.apagar);
 
-rotas.post('/agendamentos', controladorAgendamento.criar)
-rotas.get('/agendamentos', controladorAgendamento.listar)
-rotas.delete('/agendamentos/:agendamento_id', controladorAgendamento.apagar)
+rotas.post('/agendamentos', controladorAgendamento.criar);
+rotas.get('/agendamentos', controladorAgendamento.listar);
+rotas.get('/agendamentos/todos', controladorAgendamento.listarTodos);
+rotas.delete('/agendamentos/:agendamento_id', controladorAgendamento.apagar);
 
 module.exports = rotas;
