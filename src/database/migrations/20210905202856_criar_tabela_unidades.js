@@ -2,6 +2,7 @@ exports.up = knex =>
   knex.schema.createTable('unidades', table => {
     table.increments('id').primary()
     table.uuid('secundario_id').notNullable()
+    table.uuid('nome_unidade').notNullable().unique()
     table.integer('cep').notNullable()
     table.text('rua').notNullable()
     table.integer('numero')
