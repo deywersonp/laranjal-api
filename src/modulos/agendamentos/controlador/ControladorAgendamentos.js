@@ -11,22 +11,23 @@ module.exports = {
         'unidades.nome_unidade')
       .leftJoin('consultores', 'agendamentos.consultor_id', '=', 'consultores.id')
       .rightJoin('unidades', 'agendamentos.unidade_id', '=', 'unidades.id')
-      .where({ 'consultores.id': consultor_id })
+      .where({ 'consultores.id': consultor_id });
 
     return res.status(200).json(resultado);
   },
 
   async listarTodos(req, res) {
-    const { data_visita } = req.headers;
+    const { data_visita, unidade_id } = req.headers;
 
     const resultado = await knex('agendamentos')
       .select('agendamentos.data_visita',
         'agendamentos.espaco_agendado',
-        'consultores.apelido',
         'consultores.imagem',
+        'consultores.apelido',
         'consultores.email')
       .leftJoin('consultores', 'agendamentos.consultor_id', '=', 'consultores.id')
-      .where({ 'agendamentos.data_visita': data_visita })
+      .rightJoin('unidades', 'agendamentos.unidade_id', '=', 'unidades.id')
+      .where({ 'unidades.id': unidade_id, 'agendamentos.data_visita': data_visita });
 
     return res.status(200).json(resultado);
   },
