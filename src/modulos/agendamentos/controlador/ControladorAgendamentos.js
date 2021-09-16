@@ -6,7 +6,8 @@ module.exports = {
     const { consultor_id } = req.headers;
 
     const resultado = await knex('agendamentos')
-      .select('agendamentos.data_visita',
+      .select('agendamentos.id',
+        'agendamentos.data_visita',
         'agendamentos.espaco_agendado',
         'unidades.nome_unidade')
       .leftJoin('consultores', 'agendamentos.consultor_id', '=', 'consultores.id')
@@ -56,7 +57,7 @@ module.exports = {
   },
 
   async apagar(req, res) {
-    const { agendamento_id } = req.params;
+    const { agendamento_id } = req.headers;
 
     await knex('agendamentos')
       .where({ id: agendamento_id })

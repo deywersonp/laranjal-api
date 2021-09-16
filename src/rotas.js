@@ -29,6 +29,6 @@ rotas.delete('/unidades/:id', VerificaSeAdmin, verificaExistencia, controladorUn
 rotas.post('/agendamentos', controladorAgendamento.criar);
 rotas.get('/agendamentos', controladorAgendamento.listar);
 rotas.get('/agendamentos/todos', controladorAgendamento.listarTodos);
-rotas.delete('/agendamentos/:agendamento_id', controladorAgendamento.apagar);
+rotas.delete('/agendamentos', controladorAgendamento.apagar);
 
 module.exports = rotas;
