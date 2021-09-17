@@ -13,6 +13,9 @@
   },
   "tags": [
     {
+      "name": "login"
+    },
+    {
       "name": "consultores",
       "description": "Gerenciamento de Consultores"
     },
@@ -26,6 +29,84 @@
     }
   ],
   "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Efetuar login",
+        "description": "Efetuar login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "consultor@fcamara.com.br",
+                  "senha": "abc123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login efetuado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "secundario_id": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "apelido": {
+                      "type": "string"
+                    },
+                    "imagem": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2021-01-01"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Email ou senha incorretos"
+        },
+        "404": {
+          "description": "Consultor não encontrado"
+        }
+      }
+    },
     "/consultores": {
       "post": {
         "tags": [
