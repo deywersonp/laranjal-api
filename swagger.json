@@ -1,0 +1,964 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Laranjal API - Documentação",
+    "description": "API para gerenciamento de Agendamentos",
+    "version": "1.0.0",
+    "contact": {
+      "email": [
+        "deywerson.pereira@gmail.com",
+        "brunodsousa@outlook.com"
+      ]
+    }
+  },
+  "tags": [
+    {
+      "name": "login"
+    },
+    {
+      "name": "consultores",
+      "description": "Gerenciamento de Consultores"
+    },
+    {
+      "name": "unidades",
+      "description": "Gerenciamento de Unidades"
+    },
+    {
+      "name": "agendamentos",
+      "description": "Gerenciamento de Agendamentos"
+    }
+  ],
+  "paths": {
+    "/login": {
+      "post": {
+        "tags": [
+          "login"
+        ],
+        "summary": "Efetuar login",
+        "description": "Efetuar login",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "email": "consultor@fcamara.com.br",
+                  "senha": "abc123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Login efetuado com sucesso!",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "secundario_id": {
+                      "type": "string"
+                    },
+                    "admin": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "apelido": {
+                      "type": "string"
+                    },
+                    "imagem": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2021-01-01"
+                    },
+                    "token": {
+                      "type": "string",
+                      "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "400": {
+          "description": "Email ou senha incorretos"
+        },
+        "404": {
+          "description": "Consultor não encontrado"
+        }
+      }
+    },
+    "/consultores": {
+      "post": {
+        "tags": [
+          "consultores"
+        ],
+        "summary": "Criar novo usuário",
+        "description": "Criar novo usuário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "apelido": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string"
+                  },
+                  "senha": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "apelido": "Apelido/Nome Social",
+                  "email": "consultor@fcamara.com.br",
+                  "senha": "abc123"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sucesso na criação"
+          }
+        },
+        "400": {
+          "description": "Bad Request"
+        }
+      },
+      "get": {
+        "tags": [
+          "consultores"
+        ],
+        "summary": "Lista todos os usuários",
+        "description": "Lista todos os usuários",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schema/Consultores"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "consultores"
+        ],
+        "summary": "Adiciona foto ao perfil",
+        "description": "Adiciona foto ao perfil",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "headers",
+            "description": "Consultor ID",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "404": {
+          "description": "Consultor não encontrado"
+        },
+        "401": {
+          "description": "Acesso não autorizado"
+        }
+      }
+    },
+    "/consultores/{id}": {
+      "get": {
+        "tags": [
+          "consultores"
+        ],
+        "summary": "Traz as informações de um consultor específico",
+        "description": "Traz as informações de um consultor específico",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "headers",
+            "description": "Consultor ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "$ref": "#/components/schema/Consultores"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Consultor não encontrado"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "consultores"
+        ],
+        "summary": "Remove as informações de um consultor específico",
+        "description": "Remove as informações de um consultor específico",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "headers",
+            "description": "Consultor ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Consultor não encontrado"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      }
+    },
+    "/unidades": {
+      "get": {
+        "tags": [
+          "unidades"
+        ],
+        "summary": "Retorna todas as unidades cadastradas",
+        "description": "Retorna todas as unidades cadastradas",
+        "parameters": [
+          {
+            "name": "user_id",
+            "in": "headers",
+            "description": "Consultor ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          },
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "secundario_id": {
+                      "type": "string"
+                    },
+                    "nome_unidade": {
+                      "type": "string"
+                    },
+                    "cep": {
+                      "type": "integer"
+                    },
+                    "rua": {
+                      "type": "string"
+                    },
+                    "numero": {
+                      "type": "integer"
+                    },
+                    "complemento": {
+                      "type": "string"
+                    },
+                    "bairro": {
+                      "type": "string"
+                    },
+                    "cidade": {
+                      "type": "string"
+                    },
+                    "estado": {
+                      "type": "string"
+                    },
+                    "capacidade_total": {
+                      "type": "integer"
+                    },
+                    "capacidade_reduzida": {
+                      "type": "string"
+                    },
+                    "created_at": {
+                      "type": "date",
+                      "example": "2021-01-01"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "unidades"
+        ],
+        "summary": "Cria uma nova unidade",
+        "description": "Cria uma nova unidade - Funcionalidade disponível apenas para consultores admin",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome_unidade": {
+                    "type": "string"
+                  },
+                  "cep": {
+                    "type": "number"
+                  },
+                  "rua": {
+                    "type": "string"
+                  },
+                  "complemento": {
+                    "type": "string"
+                  },
+                  "numero": {
+                    "type": "number"
+                  },
+                  "bairro": {
+                    "type": "string"
+                  },
+                  "cidade": {
+                    "type": "string"
+                  },
+                  "estado": {
+                    "type": "string"
+                  },
+                  "capacidade_total": {
+                    "type": "number"
+                  },
+                  "capacidade_reduzida": {
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "nome_unidade": "Unidade exemplo",
+                  "cep": 12345123,
+                  "rua": "Rua Exemplo",
+                  "complemento": "1º andar",
+                  "numero": 57,
+                  "bairro": "Bairro Exemplo",
+                  "cidade": "Cidade Exemplo",
+                  "estado": "Estado Exemplo",
+                  "capacidade_total": 100,
+                  "capacidade_reduzida": 40
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sucesso na criação!"
+          },
+          "400": {
+            "description": "Unidade já cadastrada!"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      }
+    },
+    "/unidades/:id": {
+      "put": {
+        "tags": [
+          "unidades"
+        ],
+        "summary": "Atualiza as informações da unidade",
+        "description": "Atualiza as informações da unidade - Funcionalidade disponível apenas para consultores admin",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "description": "Unidade ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome_unidade": {
+                    "type": "string"
+                  },
+                  "cep": {
+                    "type": "number"
+                  },
+                  "rua": {
+                    "type": "string"
+                  },
+                  "complemento": {
+                    "type": "string"
+                  },
+                  "numero": {
+                    "type": "number"
+                  },
+                  "bairro": {
+                    "type": "string"
+                  },
+                  "cidade": {
+                    "type": "string"
+                  },
+                  "estado": {
+                    "type": "string"
+                  },
+                  "capacidade_total": {
+                    "type": "number"
+                  },
+                  "capacidade_reduzida": {
+                    "type": "number"
+                  }
+                },
+                "example": {
+                  "nome_unidade": "Unidade exemplo",
+                  "cep": 12345123,
+                  "rua": "Rua Exemplo",
+                  "complemento": "1º andar",
+                  "numero": 57,
+                  "bairro": "Bairro Exemplo",
+                  "cidade": "Cidade Exemplo",
+                  "estado": "Estado Exemplo",
+                  "capacidade_total": 100,
+                  "capacidade_reduzida": 40
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Unidade não encontrada"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "unidades"
+        ],
+        "summary": "Deleta uma unidade específica",
+        "description": "Deleta uma unidade - Funcionalidade disponível apenas para consultores admin",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "id",
+            "in": "params",
+            "description": "Unidade ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Consultor não encontrado"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      }
+    },
+    "/agendamentos": {
+      "get": {
+        "tags": [
+          "agendamentos"
+        ],
+        "summary": "Retorna todos os agendamentos de um consultor específico",
+        "description": "Retorna todos os agendamentos de um consultor específico",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "consultor_id",
+            "in": "headers",
+            "description": "Consultor ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "agendamentos.id": {
+                        "type": "integer"
+                      },
+                      "agendamentos.data_visita": {
+                        "type": "date",
+                        "example": "2021-01-01"
+                      },
+                      "agendamentos.espaco_agendado": {
+                        "type": "string"
+                      },
+                      "unidades.nome_unidade": {
+                        "type": "integer"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Consultor não encontrado"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "agendamentos"
+        ],
+        "summary": "Cria um novo agendamento",
+        "description": "Cria um novo agendamento",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "consultor_id",
+            "in": "headers",
+            "description": "Consultor ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "nome_unidade": {
+                    "type": "string"
+                  },
+                  "data_visita": {
+                    "type": "string"
+                  },
+                  "espaco_agendado": {
+                    "type": "string"
+                  }
+                },
+                "example": {
+                  "nome_unidade": "Unidade exemplo",
+                  "data_visita": "2021-09-16",
+                  "espaco_agendado": "Mesa-238"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Sucesso na criação!"
+          },
+          "400": {
+            "description": "Consultor não encontrado"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "agendamentos"
+        ],
+        "summary": "Remove um agendamento específico",
+        "description": "Remove um agendamento específico",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "agendamento_id",
+            "in": "headers",
+            "description": "Agendamento ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Agendamento não encontrado"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      }
+    },
+    "/agendamentos/todos": {
+      "get": {
+        "tags": [
+          "agendamentos"
+        ],
+        "summary": "Lista todos os agendamentos feitos no sistema, de todos os consultores, aplicando filtro por data e unidade",
+        "description": "Lista todos os agendamentos feitos no sistema, de todos os consultores, aplicando filtro por data e unidade",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "headers",
+            "description": "Token de autenticação",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "data_visita",
+            "in": "params",
+            "description": "Data do agendamento",
+            "type": "string",
+            "format": "string",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "string"
+            }
+          },
+          {
+            "name": "unidade_id",
+            "in": "params",
+            "description": "Unidade ID",
+            "type": "number",
+            "format": "number",
+            "required": true,
+            "schema": {
+              "type": "number",
+              "format": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "properties": {
+                      "agendamentos.data_visita": {
+                        "type": "date",
+                        "example": "2021-01-01"
+                      },
+                      "agendamentos.espaco_agendado": {
+                        "type": "string"
+                      },
+                      "consultores.imagem": {
+                        "type": "string"
+                      },
+                      "consultores.apelido": {
+                        "type": "string"
+                      },
+                      "consultores.email": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Unidade não encontrada"
+          },
+          "401": {
+            "description": "Acesso não autorizado"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schema": {
+      "Consultores": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "secundario_id": {
+            "type": "string"
+          },
+          "admin": {
+            "type": "boolean",
+            "example": false
+          },
+          "apelido": {
+            "type": "string"
+          },
+          "imagem": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          },
+          "created_at": {
+            "type": "date",
+            "example": "2021-01-01"
+          }
+        }
+      }
+    }
+  }
+}
