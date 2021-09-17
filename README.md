@@ -28,6 +28,9 @@ Laranjal API é uma API para efetuar reservas de mesas de escritório.
 
 Esse projeto foi desenvolvido com o objetivo de solucionar o desafio proposto no Hackathon do Programa de Formação da FCamara.
 
+Aproveite para conferir também o Front-end desenvolvido, clicando [aqui](https://github.com/deywersonp/laranjal).
+
+Confira como foi o processo de desenvolvimento e muito mais acessando o artigo criado pelo nosso UX no Medium através [deste link](https://medium.com/@lucas.rsjurado/laranjal-sistema-de-agendamento-df12e7a2291) ! 
 <br><br>
 
 ## 🚀 Tecnologias
