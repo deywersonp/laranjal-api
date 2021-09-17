@@ -63,7 +63,7 @@ Se você tem interesse em executar em modo de desenvolvimento, pode começar clo
 - Você encontra esse HTTP ou a chave SSH clicando em `Code` no canto direito superior deste repositório
 
 
-![image](https://user-images.githubusercontent.com/79553681/128738888-99eba5d6-4107-403e-9c89-765b497830bf.png)
+![image](https://user-images.githubusercontent.com/79553681/133712849-0b3145fc-4810-4b64-bce8-0970a98f22fb.png)
 
 
 - Depois de clonar você pode abrir o projeto na sua IDE e digitar os codes abaixo no terminal da IDE
